@@ -1,5 +1,6 @@
 package com.casecode.sunshine.utilities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.format.DateUtils;
 
@@ -40,8 +41,7 @@ public final class SunshineDateUtils {
      */
     public static long normalizeDate(long date) {
         // Normalize the start date to the beginning of the (UTC) day in local time
-        long retValNew = date / DAY_IN_MILLIS * DAY_IN_MILLIS;
-        return retValNew;
+        return date / DAY_IN_MILLIS * DAY_IN_MILLIS;
     }
 
     /**
@@ -112,7 +112,7 @@ public final class SunshineDateUtils {
                  * documentation on DateFormat#getBestDateTimePattern(Locale, String)
                  * https://developer.android.com/reference/android/text/format/DateFormat.html#getBestDateTimePattern
                  */
-                String localizedDayName = new SimpleDateFormat("EEEE").format(localDate);
+                @SuppressLint("SimpleDateFormat") String localizedDayName = new SimpleDateFormat("EEEE").format(localDate);
                 return readableDate.replace(localizedDayName, dayName);
             } else {
                 return readableDate;
@@ -170,7 +170,7 @@ public final class SunshineDateUtils {
              * Otherwise, if the day is not today, the format is just the day of the week
              * (e.g "Wednesday")
              */
-            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
             return dayFormat.format(dateInMillis);
         }
     }
